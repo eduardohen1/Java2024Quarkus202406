@@ -21,7 +21,7 @@ public class GreetingResource {
 
         //return "Hello RESTEasy \n" + p.toString();
         //return greetingService.greet();
-        return greetingService.greetPessoa(new Pessoa(1L,
+        return greetingService.greetPessoa(new Pessoa(null,
                 "Nome pessoa",
                 "Endereco pessoa",
                 "Cidade pessoa",
