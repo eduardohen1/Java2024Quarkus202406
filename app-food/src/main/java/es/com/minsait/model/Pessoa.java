@@ -1,13 +1,24 @@
 package es.com.minsait.model;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Pessoa {
 
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nome;
-    private String endereco;
+   @Column(name = "nome")
+   private String nome;
+    @Column(name = "endereco")
+   private String endereco;
+    @Column(name = "cidade")
     private String cidade;
+    @Column(name = "uf")
     private String uf;
+    @Column(name = "tipoDocumento")
     private TipoDocumento tipoDocumento;
+    @Column(name = "documento")
     private String documento;
 
     public Pessoa() { }
