@@ -7,11 +7,12 @@ import es.com.minsait.model.Pedido;
 public class PedidoResponse {
 
     private Boolean confirmed;
-    private Pedido pedido;
+    //private Pedido pedido;
+    private String pedido;
 
     public PedidoResponse() { }
 
-    public PedidoResponse(Boolean confirmed, Pedido pedido) {
+    public PedidoResponse(Boolean confirmed, String pedido) {
         this.confirmed = confirmed;
         this.pedido = pedido;
     }
@@ -24,11 +25,11 @@ public class PedidoResponse {
         this.confirmed = confirmed;
     }
 
-    public Pedido getPedido() {
+    public String getPedido() {
         return pedido;
     }
 
-    public void setPedido(Pedido pedido) {
+    public void setPedido(String pedido) {
         this.pedido = pedido;
     }
 }
