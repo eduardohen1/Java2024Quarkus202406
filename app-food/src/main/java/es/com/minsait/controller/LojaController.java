@@ -33,23 +33,29 @@ public class LojaController {
     @GET
     @Path("/{id}/cardapio")
     public Response getCardapio(@PathParam("id") Long id){
-        Loja loja = Loja.findById(id);
-        if(loja == null){
-            return Response.status(Response.Status.NOT_FOUND).build();
+        try {
+            Loja loja = Loja.findById(id);
+            if (loja == null) {
+                LOG.error("Loja não encontrada para o id: " + id);
+                return Response.status(Response.Status.NOT_FOUND).build();
+            }
+
+            String url = loja.getUrlApi() + "cardapio";
+
+            //mock ------------------- implementar a consulta externa
+            List<ItemCardapio> itensCardapio = retornaCardapioFake();
+
+            // -----------------------
+
+            if (itensCardapio == null || itensCardapio.isEmpty()) {
+                LOG.error("Cardápio não encontrado para a loja: " + loja.getNome() + ", URL: " + loja.getUrlApi());
+                return Response.status(Response.Status.NOT_FOUND).build();
+            }
+            return Response.ok(Response.Status.OK).entity(itensCardapio).build();
+        }catch (Exception e){
+            LOG.error("Erro ao buscar cardápio da loja: ", e.getMessage());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         }
-
-        String url = loja.getUrlApi() + "/cardapio";
-
-        //mock ------------------- implementar a consulta externa
-        List<ItemCardapio> itensCardapio = retornaCardapioFake();
-
-        // -----------------------
-
-        if(itensCardapio == null || itensCardapio.isEmpty()){
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
-        return Response.ok(Response.Status.OK).entity(itensCardapio).build();
-
     }
 
     private List<ItemCardapio> retornaCardapioFake() {

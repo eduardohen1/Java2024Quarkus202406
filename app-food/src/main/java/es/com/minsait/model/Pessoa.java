@@ -98,4 +98,15 @@ public class Pessoa extends PanacheEntity {
                 ", documento='" + documento + '\'' +
                 '}';
     }
+
+    public String returnObjJson() {
+        return "{ \"id\": " + (this.id != null ? this.id : 0) +
+                ", \"nome\": \"" + this.nome +
+                "\", \"endereco\": \"" + this.endereco +
+                "\", \"cidade\": \"" + this.cidade +
+                "\", \"uf\": \"" + this.uf +
+                "\", \"tipoDocumento\": " + this.tipoDocumento +
+                ", \"documento\": \"" + this.documento +
+                "\"}";
+    }
 }

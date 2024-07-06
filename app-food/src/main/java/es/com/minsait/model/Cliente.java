@@ -34,4 +34,10 @@ public class Cliente extends PanacheEntity {
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
     }
+
+    public String returnObjJson() {
+        return "{\"id\":" + (this.id != null ? this.id : 0) +
+                ",\"email\":\"" + this.email +
+                "\",\"pessoa\":" + this.pessoa.returnObjJson() + "}";
+    }
 }

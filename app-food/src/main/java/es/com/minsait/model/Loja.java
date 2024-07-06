@@ -41,4 +41,12 @@ public class Loja extends PanacheEntity {
     public void setUrlApi(String urlApi) {
         this.urlApi = urlApi;
     }
+
+    public String returnObjJson() {
+        return "{\"id\":" + this.id +
+                ",\"nome\":\"" + this.nome +
+                "\",\"endereco\":\"" + this.endereco +
+                "\",\"urlApi\":\"" + this.urlApi +
+                "\"}";
+    }
 }
