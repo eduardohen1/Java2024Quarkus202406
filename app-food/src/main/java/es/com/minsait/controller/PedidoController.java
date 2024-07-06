@@ -31,10 +31,12 @@ public class PedidoController {
                 return Response.status(Response.Status.BAD_REQUEST).entity("Loja não informada para o pedido").build();
             }
 
-            String url = pedido.getLoja().getUrlApi() + "pedido";
+            String url = pedido.getLoja().getUrlApi() + "pedidos";
 
             Client client = jakarta.ws.rs.client.ClientBuilder.newClient();
             String jsonPedido = pedido.returnObjJson();
+
+            LOG.error(">>> Pedido a ser realizado: \n" + jsonPedido);
 
             //enviar o pedido para a url da Loja
             Response pedidoResponse = client.target(url)
@@ -50,7 +52,7 @@ public class PedidoController {
                 return Response.status(Response.Status.CREATED).entity(pedidoResponse).build();
             }
         }catch (Exception e){
-            LOG.error("Erro ao criar pedido: ", e.getMessage());
+            LOG.error("Erro ao criar pedido: ", e);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         }
     }
