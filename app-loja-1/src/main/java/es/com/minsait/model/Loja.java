@@ -38,4 +38,12 @@ public class Loja {
         this.urlApi = urlApi;
     }
 
+    @Override
+    public String toString() {
+        return "Loja{" +
+                "nome='" + nome + '\'' +
+                ", endereco='" + endereco + '\'' +
+                ", urlApi='" + urlApi + '\'' +
+                '}';
+    }
 }

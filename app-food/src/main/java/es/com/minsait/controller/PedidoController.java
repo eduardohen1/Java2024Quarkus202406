@@ -46,7 +46,7 @@ public class PedidoController {
             //testar se a requisição retornou OK (200 201)
             if(pedidoResponse.getStatus() != Response.Status.CREATED.getStatusCode() &&
                pedidoResponse.getStatus() != Response.Status.OK.getStatusCode()){
-                LOG.error("Erro ao criar pedido na loja: " + pedido.getLoja().getNome() + ", URL: " + pedido.getLoja().getUrlApi());
+                LOG.error("Erro ao criar pedido na loja: " + pedido.getLoja().getNome() + ", URL: " + url + ", StatusCode: " + pedidoResponse.getStatus());
                 return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro ao criar pedido na loja.").build();
             }else{
                 return Response.status(Response.Status.CREATED).entity(pedidoResponse).build();

@@ -86,6 +86,17 @@ public class Pessoa extends PanacheEntity {
         this.documento = documento;
     }
 
+    private String retornaTipoDocumento() {
+        switch (this.tipoDocumento) {
+            case CPF:
+                return "CPF";
+            case CNPJ:
+                return "CNPJ";
+            default:
+                return "TIPO DE DOCUMENTO NÃO ENCONTRADO";
+        }
+    }
+
     @Override
     public String toString() {
         return "Pessoa{" +
@@ -105,7 +116,7 @@ public class Pessoa extends PanacheEntity {
                 "\", \"endereco\": \"" + this.endereco +
                 "\", \"cidade\": \"" + this.cidade +
                 "\", \"uf\": \"" + this.uf +
-                "\", \"tipoDocumento\": " + this.tipoDocumento +
+                "\", \"tipoDocumento\": " + "\"" + retornaTipoDocumento() + "\"" +
                 ", \"documento\": \"" + this.documento +
                 "\"}";
     }

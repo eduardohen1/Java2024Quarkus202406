@@ -28,4 +28,11 @@ public class Cliente {
         this.pessoa = pessoa;
     }
 
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "email='" + email + '\'' +
+                ", pessoa=" + pessoa.toString() +
+                '}';
+    }
 }

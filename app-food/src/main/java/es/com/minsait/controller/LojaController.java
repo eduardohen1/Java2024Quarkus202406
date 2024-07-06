@@ -4,6 +4,7 @@ import es.com.minsait.dto.ItemCardapio;
 import es.com.minsait.model.Loja;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.slf4j.Logger;
@@ -42,8 +43,21 @@ public class LojaController {
 
             String url = loja.getUrlApi() + "cardapio";
 
-            //mock ------------------- implementar a consulta externa
-            List<ItemCardapio> itensCardapio = retornaCardapioFake();
+            //implementar a consulta externa
+            Client client = jakarta.ws.rs.client.ClientBuilder.newClient();
+            Response cardapioResponse = client.target(url)
+                    .request(MediaType.APPLICATION_JSON)
+                    .get();
+
+            if(cardapioResponse.getStatus() != Response.Status.OK.getStatusCode() &&
+                    cardapioResponse.getStatus() != Response.Status.CREATED.getStatusCode()){
+                LOG.error("Erro ao buscar cardápio da loja: " + loja.getNome() + ", URL: " + loja.getUrlApi());
+                return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro ao buscar cardápio da loja.").build();
+            }else {
+                LOG.error(">>> Cardapio da URL:\n" + cardapioResponse);
+            }
+
+            List<ItemCardapio> itensCardapio = convertRequestToList(cardapioResponse);
 
             // -----------------------
 
@@ -56,6 +70,12 @@ public class LojaController {
             LOG.error("Erro ao buscar cardápio da loja: ", e.getMessage());
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         }
+    }
+
+    private List<ItemCardapio> convertRequestToList(Response cardapioResponse) throws Exception {
+        List<ItemCardapio> itensCardapio = new ArrayList<>();
+        itensCardapio = cardapioResponse.readEntity(List.class);
+        return itensCardapio;
     }
 
     private List<ItemCardapio> retornaCardapioFake() {

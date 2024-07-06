@@ -78,12 +78,25 @@ public class Pedido extends PanacheEntity {
                 ", \"loja\": " + this.loja.returnObjJson() +
                 ", \"dataPedido\": \"" + this.dataPedido +
                 "\", \"descricao\": \"" + this.descricao +
-                "\", \"itensPedido\": " + this.returnItensPedidoJson() +
-                "}";
+                "\", \"itensPedido\": [" + this.returnItensPedidoJson() +
+                "]}";
     }
 
     private String returnItensPedidoJson() {
         StringBuilder itensJson = new StringBuilder();
+        for(int i = 0; i < this.itensPedido.size(); i++){
+            ItemPedido item = this.itensPedido.get(i);
+
+            itensJson.append("{")
+                    .append("\"id\": " + (item.id != null ? item.id : 0) + ", ")
+                    .append("\"quantidade\":").append(item.getQuantidade()).append(", ")
+                    .append("\"preco\":").append(item.getPreco())
+                    .append("}");
+            if(i < this.itensPedido.size()-1)
+                itensJson.append(", ");
+        }
+        /*
+
         for(ItemPedido item : this.itensPedido){
             itensJson.append("{");
             itensJson.append("\"id\": " + (item.id != null ? item.id : 0) + ", ");
@@ -96,7 +109,7 @@ public class Pedido extends PanacheEntity {
             if(this.itensPedido.indexOf(item) < this.itensPedido.size() - 1){
                 itensJson.append(", ");
             }
-        }
+        }*/
         return itensJson.toString();
     }
 

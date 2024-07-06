@@ -68,4 +68,15 @@ public class Pessoa {
         this.documento = documento;
     }
 
+    @Override
+    public String toString() {
+        return "Pessoa{" +
+                "nome='" + nome + '\'' +
+                ", endereco='" + endereco + '\'' +
+                ", cidade='" + cidade + '\'' +
+                ", uf='" + uf + '\'' +
+                ", tipoDocumento='" + tipoDocumento + '\'' +
+                ", documento='" + documento + '\'' +
+                '}';
+    }
 }
