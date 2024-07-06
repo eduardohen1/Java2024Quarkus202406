@@ -1,7 +1,6 @@
 package es.com.minsait.controller;
 
 import es.com.minsait.model.Pessoa;
-import es.com.minsait.repository.PessoaRepository;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
@@ -14,18 +13,15 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 public class PessoaController {
 
-    @Inject
-    PessoaRepository pessoaRepository;
-
     @GET
     public List<Pessoa> listAll(){
-        return pessoaRepository.listAll();
+        return Pessoa.listAll();
     }
 
     @POST
     @Transactional
     public Pessoa create(Pessoa pessoa){
-        pessoaRepository.persist(pessoa);
+        pessoa.persist();
         return pessoa;
     }
 

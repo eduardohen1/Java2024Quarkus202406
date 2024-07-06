@@ -1,17 +1,14 @@
 package es.com.minsait.model;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.*;
 
 @Entity
-public class Pessoa {
-
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-   @Column(name = "nome")
-   private String nome;
+public class Pessoa extends PanacheEntity {
+    @Column(name = "nome")
+    private String nome;
     @Column(name = "endereco")
-   private String endereco;
+    private String endereco;
     @Column(name = "cidade")
     private String cidade;
     @Column(name = "uf")

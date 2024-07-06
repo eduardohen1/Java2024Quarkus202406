@@ -4,6 +4,7 @@ import es.com.minsait.model.Pessoa;
 import es.com.minsait.model.TipoDocumento;
 import es.com.minsait.service.GreetingService;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
